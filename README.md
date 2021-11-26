@@ -1,16 +1,5 @@
 # getx_bottom_nav_sample
 
-A new Flutter project.
+![Kapture 2021-11-26 at 09 35 49](https://user-images.githubusercontent.com/28912774/143510700-a700efa8-2eb6-410c-a50d-49616aceb800.gif)
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+The sample of AnimatedBottomNavBar with GetX
