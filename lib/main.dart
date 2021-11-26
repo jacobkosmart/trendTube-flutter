@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx_bottom_nav_sample/pages/detail/detail_page.dart';
 import 'package:getx_bottom_nav_sample/pages/dashboard/dashboard.dart';
 import 'package:getx_bottom_nav_sample/pages/dashboard/dashboard_binding.dart';
 
@@ -14,17 +15,22 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Flutter Demo',
+      title: 'Youtube Favorite App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+          primaryColor: Colors.white,
+          primarySwatch: Colors.blue,
+          visualDensity: VisualDensity.adaptivePlatformDensity),
       initialRoute: "/",
+      initialBinding: DashboardBinding(),
       getPages: [
         GetPage(
           name: "/",
           page: () => MyDashBoard(),
-          binding: DashboardBinding(),
+        ),
+        GetPage(
+          name: "/detail/:videoId",
+          page: () => YoutubeDetail(),
         ),
       ],
     );
