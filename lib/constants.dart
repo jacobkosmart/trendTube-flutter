@@ -12,7 +12,7 @@ const kH2 = TextStyle(fontSize: 16);
 const kH3 = TextStyle(fontSize: 14);
 const kH4 = TextStyle(fontSize: 12);
 
-final kOpacity = Colors.grey.withOpacity(0.5);
+final kOpacity = Colors.grey.withOpacity(0.7);
 
 const kDefaultShadow = BoxShadow(
   offset: Offset(0, 4),

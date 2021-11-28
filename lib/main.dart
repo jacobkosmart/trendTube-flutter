@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx_bottom_nav_sample/pages/detail/detail_controller.dart';
 import 'package:getx_bottom_nav_sample/pages/detail/detail_page.dart';
 import 'package:getx_bottom_nav_sample/pages/dashboard/dashboard.dart';
 import 'package:getx_bottom_nav_sample/pages/dashboard/dashboard_binding.dart';
@@ -31,6 +32,12 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: "/detail/:videoId",
           page: () => YoutubeDetail(),
+          // Detail Page Bindings 처리
+          binding: BindingsBuilder(
+            () => Get.lazyPut<DetailController>(
+              () => DetailController(),
+            ),
+          ),
         ),
       ],
     );

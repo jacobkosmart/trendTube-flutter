@@ -35,7 +35,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   get:
   freezed_annotation:
-  json_annotation:
+  json_annotation: ^4.3.0
   equatable:
   http:
   flutter_svg:

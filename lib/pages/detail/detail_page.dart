@@ -3,6 +3,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:getx_bottom_nav_sample/constants.dart';
 import 'package:getx_bottom_nav_sample/pages/detail/detail_controller.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class YoutubeDetail extends GetView<DetailController> {
   const YoutubeDetail({Key? key}) : super(key: key);
@@ -14,18 +16,19 @@ class YoutubeDetail extends GetView<DetailController> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            "JacobInfo 유튜브 다시보기",
+            controller.title!,
             style: kH2,
           ),
+          SizedBox(height: 10),
           Row(
             children: [
               Text(
-                "조회수 1000회",
+                controller.viewCount!,
                 style: kH3.copyWith(color: kOpacity),
               ),
               Text(" · "),
               Text(
-                "2021-02-13",
+                controller.publishedTime!,
                 style: kH3.copyWith(color: kOpacity),
               ),
             ],
@@ -37,10 +40,12 @@ class YoutubeDetail extends GetView<DetailController> {
 
   Widget _discriptionZone() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       child: Text(
-        "안녕하세요 간단한 설명입니다",
+        controller.discription!,
         style: kH3,
+        maxLines: 8,
+        overflow: TextOverflow.ellipsis,
       ),
     );
   }
@@ -61,8 +66,8 @@ class YoutubeDetail extends GetView<DetailController> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        _buttonsOne(iconPath: "like", text: "1000"),
-        _buttonsOne(iconPath: "dislike", text: "0"),
+        _buttonsOne(iconPath: "like", text: controller.likeCount),
+        _buttonsOne(iconPath: "dislike", text: controller.dislikeCount),
         _buttonsOne(iconPath: "share", text: "공유"),
         _buttonsOne(iconPath: "save", text: "저장"),
       ],
@@ -77,22 +82,23 @@ class YoutubeDetail extends GetView<DetailController> {
           CircleAvatar(
             backgroundColor: kOpacity,
             backgroundImage: Image.network(
-              "https://jacobko.info/assets/images/Jacob_avatar.png",
+              controller.youtuberThumbnailUrl!,
             ).image,
           ),
           SizedBox(width: 15),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: const [
-                Text("Jacob 유튜브", style: kH1),
-                Text("구독자 10000", style: kH3),
+              children: [
+                Text(controller.youtuberName!, style: kH1),
+                Text("${controller.subscriberCount!}", style: kH3),
               ],
             ),
           ),
           GestureDetector(
+            onTap: () {},
             child: Text(
-              "구독",
+              "즐겨찾기 추가",
               style: kH2.copyWith(color: Colors.red),
             ),
           ),
@@ -107,11 +113,9 @@ class YoutubeDetail extends GetView<DetailController> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           _titleZone(),
-          Divider(),
           _discriptionZone(),
           _buttonsZone(),
           SizedBox(height: 20),
-          Divider(),
           _ownerZone(),
         ],
       ),
@@ -121,20 +125,51 @@ class YoutubeDetail extends GetView<DetailController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.blue,
-      ),
-      body: Column(
-        children: [
-          Container(
-            height: 250,
-            color: kOpacity,
-          ),
-          Expanded(
-            child: _description(),
-          )
-        ],
+      body: SafeArea(
+        child: Column(
+          children: [
+            YoutubePlayer(
+              controller: controller.playerController!,
+              showVideoProgressIndicator: false,
+              progressIndicatorColor: Colors.blueAccent,
+              // topActions: <Widget>[
+              //   const SizedBox(width: 8.0),
+              //   Expanded(
+              //     child: Text(
+              //       controller.playerController!.metadata.title,
+              //       style: const TextStyle(
+              //         color: Colors.white,
+              //         fontSize: 18.0,
+              //       ),
+              //       overflow: TextOverflow.ellipsis,
+              //       maxLines: 1,
+              //     ),
+              //   ),
+              //   IconButton(
+              //     icon: const Icon(
+              //       Icons.settings,
+              //       color: Colors.white,
+              //       size: 25.0,
+              //     ),
+              //     onPressed: () {},
+              //   ),
+              // ],
+              // bottomActions: [
+              //   const SizedBox(width: 14.0),
+              //   CurrentPosition(),
+              //   const SizedBox(width: 8.0),
+              //   ProgressBar(),
+              //   RemainingDuration(),
+              //   const PlaybackSpeedButton(),
+              // ],
+              onReady: () {},
+              onEnded: (data) {},
+            ),
+            Expanded(
+              child: _description(),
+            )
+          ],
+        ),
       ),
     );
   }

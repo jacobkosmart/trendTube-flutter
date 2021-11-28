@@ -42,11 +42,10 @@ class CustomAppBar extends GetView<CommonController> {
           ),
         ),
         SizedBox(width: 15),
-        // 비동기로 접속 하고 getx controller 에 연결된 변수 url 을 string 타입으로 연결 해 준다
         GestureDetector(
           onTap: () async {
             await launch(
-              controller.jacobkoInfo,
+              "https://jacobko.info/",
               // 안드로이드 webview 연결 (인앱)
               forceWebView: true,
               // iOS Safari webview 연결 (인앱)
